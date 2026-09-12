@@ -1,11 +1,12 @@
-"""AquaAlert AI — Agent 2: Geospatial Grid Generator.
+"""AquaAlert AI - Agent 2: Geospatial Grid Generator.
 
 Generates standardized topographical grid cells with elevation, slope,
 and drainage attributes for pilot monitoring areas.
 """
 
-from typing import List, Dict
+from typing import List, Dict, Any
 from backend.contracts import GridCell
+
 
 
 PILOT_AREA_CELLS: Dict[str, List[Dict[str, Any]]] = {
