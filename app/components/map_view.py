@@ -79,6 +79,14 @@ def render_interactive_map(
 
     df = pd.DataFrame(records)
 
+        # 🌐 OpenStreetMap raster tile layer
+    osm_base_layer = pdk.Layer(
+        "TileLayer",
+        "https://openstreetmap.org{z}/{x}/{y}.png",
+        min_zoom=0,
+        max_zoom=19,
+    )
+
     # 1. 3D Column Layer for Risk Visualization
     column_layer = pdk.Layer(
         "ColumnLayer",
@@ -123,10 +131,13 @@ def render_interactive_map(
     }
 
     deck = pdk.Deck(
-        layers=[scatter_layer, column_layer],
+        layers=[osm_base_layer, scatter_layer, column_layer],
         initial_view_state=view_state,
         tooltip=tooltip,
-        map_style="mapbox://styles/mapbox/dark-v10",
+        map_style=None
     )
+
+
+
 
     st.pydeck_chart(deck, use_container_width=True, height=height)
