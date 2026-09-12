@@ -4,13 +4,11 @@ Extracts moving window accumulations: rainfall_1h, rainfall_3h, rainfall_6h,
 and peak rainfall intensity from raw weather series.
 """
 
-from typing import Dict, Any, List
-
-
+from typing import Any
 def parse_weather_response(
-    raw_data: Dict[str, Any],
+    raw_data: dict[str, Any],
     horizon_hours: int = 0,
-) -> Dict[str, float]:
+) -> dict[str, float]:
     """Parse raw Open-Meteo payload into structured rainfall features.
 
     Args:
@@ -21,7 +19,7 @@ def parse_weather_response(
         Dictionary containing rainfall_1h, rainfall_3h, rainfall_6h, and rainfall_intensity.
     """
     hourly = raw_data.get("hourly", {})
-    precip_list: List[float] = hourly.get("precipitation", [])
+    precip_list: list[float] = hourly.get("precipitation", [])
 
     if not precip_list:
         # Fallback to zero if empty

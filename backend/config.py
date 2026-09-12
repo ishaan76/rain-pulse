@@ -5,7 +5,6 @@ and operational parameters.
 """
 
 from typing import Dict, Any
-
 # Pilot monitoring areas supported for SIH demonstration
 PILOT_AREAS: Dict[str, Dict[str, Any]] = {
     "Delhi NCR": {
@@ -31,6 +30,12 @@ PILOT_AREAS: Dict[str, Dict[str, Any]] = {
         "longitude": 77.4538,
         "zoom": 12,
         "description": "Hindon river basin and industrial-residential lowlands",
+    },
+    "Greater Noida": {
+        "latitude": 28.4744,
+        "longitude": 77.5040,
+        "zoom": 12,
+        "description": "Yamuna Expressway Corridor urban corridor with high waterlogging vulnerability",
     },
 }
 

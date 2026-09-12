@@ -1,4 +1,4 @@
-"""AquaAlert AI — Agent 3: Feature Engineering & Validation.
+"""AquaAlert AI — Agent 1: Feature Engineering & Validation.
 
 Converts structured EnvironmentalFeatures dataclass instances into
 validated NumPy arrays compatible with scikit-learn estimators.
@@ -6,9 +6,8 @@ validated NumPy arrays compatible with scikit-learn estimators.
 
 from typing import List, Tuple
 import numpy as np
+import pandas as pd
 from backend.contracts import EnvironmentalFeatures
-
-
 FEATURE_NAMES: List[str] = [
     "rainfall_1h",
     "rainfall_3h",
@@ -20,8 +19,6 @@ FEATURE_NAMES: List[str] = [
     "drainage_density",
     "historical_risk",
 ]
-
-
 def validate_features(features: EnvironmentalFeatures) -> None:
     """Validate numerical ranges of environmental features.
 
@@ -43,8 +40,6 @@ def validate_features(features: EnvironmentalFeatures) -> None:
         raise ValueError("Drainage density must be in [0.0, 1.0].")
     if not (0.0 <= features.historical_risk <= 1.0):
         raise ValueError("Historical risk must be in [0.0, 1.0].")
-
-
 def features_to_array(features: EnvironmentalFeatures) -> pd.DataFrame:
     """Convert an EnvironmentalFeatures instance into a feature dataframe with proper columns.
 
@@ -55,7 +50,6 @@ def features_to_array(features: EnvironmentalFeatures) -> pd.DataFrame:
         pandas DataFrame of shape (1, n_features) with named columns.
     """
     validate_features(features)
-    import pandas as pd
     return pd.DataFrame(
         [[
             features.rainfall_1h,

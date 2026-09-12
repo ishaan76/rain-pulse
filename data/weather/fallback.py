@@ -5,8 +5,6 @@ offline or running in hackathon demo mode.
 """
 
 from typing import Dict, Any
-
-
 DEMO_WEATHER_SCENARIOS: Dict[str, Dict[str, Any]] = {
     "Delhi NCR": {
         "scenario_name": "Yamuna Basin Monsoon Surge & Cloudburst",
@@ -44,9 +42,16 @@ DEMO_WEATHER_SCENARIOS: Dict[str, Dict[str, Any]] = {
             6: {"rainfall_1h": 8.0, "rainfall_3h": 22.0, "rainfall_6h": 78.0, "rainfall_intensity": 10.0},
         },
     },
+    "Greater Noida": {
+        "scenario_name": "Yamuna Expressway Corridor Waterlogging",
+        "horizons": {
+            0: {"rainfall_1h": 20.0, "rainfall_3h": 38.0, "rainfall_6h": 50.0, "rainfall_intensity": 22.0},
+            1: {"rainfall_1h": 30.0, "rainfall_3h": 52.0, "rainfall_6h": 68.0, "rainfall_intensity": 31.0},
+            3: {"rainfall_1h": 42.0, "rainfall_3h": 70.0, "rainfall_6h": 90.0, "rainfall_intensity": 43.0},
+            6: {"rainfall_1h": 11.0, "rainfall_3h": 30.0, "rainfall_6h": 100.0, "rainfall_intensity": 13.0},
+        },
+    },
 }
-
-
 def get_fallback_weather_scenario(area_name: str, horizon_hours: int = 0) -> Dict[str, Any]:
     """Retrieve pre-computed weather metrics for offline / demo mode.
 
@@ -59,11 +64,11 @@ def get_fallback_weather_scenario(area_name: str, horizon_hours: int = 0) -> Dic
     """
     area_data = DEMO_WEATHER_SCENARIOS.get(area_name, DEMO_WEATHER_SCENARIOS["Delhi NCR"])
     horizons = area_data["horizons"]
-    
+
     # Map to nearest supported horizon key
     available_horizons = sorted(horizons.keys())
     closest_horizon = min(available_horizons, key=lambda h: abs(h - horizon_hours))
-    
+
     metrics = horizons[closest_horizon].copy()
     metrics["scenario_name"] = area_data["scenario_name"]
     metrics["is_fallback"] = True
