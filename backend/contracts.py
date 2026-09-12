@@ -7,8 +7,6 @@ and Agent 5 (UI/Map).
 
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
-
-
 @dataclass
 class EnvironmentalFeatures:
     """Environmental inputs used by the AquaAlert prediction engine.
@@ -34,8 +32,6 @@ class EnvironmentalFeatures:
     drainage_distance: float
     drainage_density: float
     historical_risk: float = 0.5
-
-
 @dataclass
 class RiskPrediction:
     """Risk output returned by the AquaAlert prediction engine.
@@ -51,8 +47,6 @@ class RiskPrediction:
     risk_level: str
     ml_probability: float
     physical_score: float
-
-
 @dataclass
 class GridCell:
     """Geographical grid cell representation for localized hazard analysis.
@@ -78,8 +72,6 @@ class GridCell:
     drainage_distance: float
     drainage_density: float
     historical_risk: float = 0.5
-
-
 @dataclass
 class GridPredictionResult:
     """Evaluated risk prediction for a single grid cell.
@@ -99,8 +91,6 @@ class GridPredictionResult:
     is_hotspot: bool
     drivers: Dict[str, float] = field(default_factory=dict)
     recommendation: str = ""
-
-
 @dataclass
 class AreaRiskSummary:
     """Aggregated risk summary for an entire pilot administrative area.

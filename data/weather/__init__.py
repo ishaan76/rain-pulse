@@ -1,4 +1,4 @@
-"""Agent 1 — Weather & Rainfall Module."""
+"""AquaAlert AI — Agent 1: Weather & Rainfall Module."""
 
 from data.weather.service import WeatherService
 from data.weather.fallback import get_fallback_weather_scenario
