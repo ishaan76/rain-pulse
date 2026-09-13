@@ -6,6 +6,7 @@ into a unified, reliable business service layer.
 
 from typing import List, Dict, Any, Optional
 import numpy as np
+from cachetools import TTLCache, cached
 
 from backend.contracts import (
     GridCell,
@@ -18,6 +19,9 @@ from backend.validator import validate_area_name
 from data.weather.service import WeatherService
 from data.terrain.service import TerrainService
 from model.predictor import FloodPredictor, get_default_predictor
+
+# Global cache for predictions (max 100 items, expires in 5 minutes)
+_prediction_cache = TTLCache(maxsize=100, ttl=300)
 
 
 class AquaAlertBackend:
@@ -34,6 +38,7 @@ class AquaAlertBackend:
         self.terrain = terrain_service or TerrainService()
         self.predictor = predictor or get_default_predictor()
 
+    @cached(cache=_prediction_cache)
     def get_grid_predictions(
         self,
         area: str = DEFAULT_AREA,
