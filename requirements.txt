@@ -7,3 +7,4 @@ joblib>=1.4.0
 requests>=2.31.0
 pytest>=8.0.0
 ruff>=0.5.0
+cachetools>=5.3.0
